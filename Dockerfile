@@ -2,7 +2,12 @@ FROM python:3.12-slim
 
 # Install required packages
 RUN apt-get update --allow-releaseinfo-change && \
-    apt-get install -y --no-install-recommends ffmpeg wireless-tools curl unzip && \
+    apt-get install -y --no-install-recommends \
+        ffmpeg \
+        librubberband2 \
+        wireless-tools \
+        curl \
+        unzip && \
     apt-get clean && \
     curl -fsSL https://deno.land/install.sh | DENO_INSTALL=/usr/local sh -s -- -y && \
     pip install poetry && \
@@ -21,4 +26,4 @@ RUN poetry install --only main --no-root
 COPY pikaraoke ./pikaraoke
 RUN poetry install
 
-ENTRYPOINT ["poetry", "run", "pikaraoke", "-d", "/app/pikaraoke-songs/", "--headless"]
+ENTRYPOINT ["poetry", "run", "pikaraoke", "-d", "/app/pikaraoke-songs/", "--headless", "-l", "10", "-c"]
