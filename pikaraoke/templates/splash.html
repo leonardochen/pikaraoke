@@ -376,8 +376,11 @@
     });
 
     $("#video source")[0].addEventListener("error", (e) => {
-      console.log("Error while playing video.");
-      console.log(e);
+      console.error("Error while playing video.");
+      console.error("Error event:", e);
+      console.error("Video source:", $("#video source")[0].src);
+      console.error("Video error code:", video.error ? video.error.code : "none");
+      console.error("Video error message:", video.error ? video.error.message : "none");
       endSong("error while playing");
     });
 
