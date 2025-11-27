@@ -4,11 +4,13 @@ services:
     container_name: PiKaraoke
     ## Below Host network mode may work better on some systems and replace manual IP configuration. Does not work on OSX
     # network_mode: host
-    ## add additional command line args if needed in example below: debug level logging, manually specified URL
-    command: -l10 --url http://<YOUR_LAN_IP>
+    environment:
+      ## Set your public URL/IP address for the QR code and splash screen
+      ## Include the port if not using port 80
+      PUBLIC_URL: "http://<YOUR_PUBLIC_IP_OR_HOSTNAME>:5555"
     volumes:
       - </PATH/TO/LOCAL/SONGS/DIR>:/app/pikaraoke-songs # Replace with local dir. to persist songs outside the container
     restart: unless-stopped
-    ## Forward host port 80 to the pikaraoke web interface on 5555, adjust host port as necessary
+    ## Forward host port 5555 to the pikaraoke web interface on 5555
     ports:
-      - "80:5555"
+      - "5555:5555"

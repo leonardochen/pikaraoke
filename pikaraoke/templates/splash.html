@@ -529,6 +529,20 @@
 </script>
 {% endblock %} {% block body %}
 
+{% if not hide_url %}
+<div id="qr-code" class="overlay" style="position: fixed; top: 10px; left: 50%; transform: translateX(-50%); z-index: 1000; text-align: center;">
+  <img
+    src="{{ url_for('images.qrcode') }}"
+    width="150px"
+    style="image-rendering: pixelated"
+    alt="qrcode"
+  />
+  <div class="is-size-6 stroke">
+    <div>{{ url }}</div>
+  </div>
+</div>
+{% endif %}
+
 <div id="top-container" class="overlay">
   <div
     id="now-playing"
@@ -564,19 +578,6 @@
 </div>
 
 <div id="bottom-container" class="overlay">
-  {% if not hide_url %}
-  <div id="qr-code">
-    <img
-      src="{{ url_for('images.qrcode') }}"
-      width="100px"
-      style="image-rendering: pixelated"
-      alt="qrcode"
-    />
-    <div class="is-size-6 stroke">
-      <div>&nbsp;{{ url }}</div>
-    </div>
-  </div>
-  {% endif %}
   <div></div>
   <div
     id="up-next"

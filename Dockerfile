@@ -26,4 +26,7 @@ RUN poetry install --only main --no-root
 COPY pikaraoke ./pikaraoke
 RUN poetry install
 
-ENTRYPOINT ["poetry", "run", "pikaraoke", "-d", "/app/pikaraoke-songs/", "--headless", "-l", "10", "-c"]
+# Set default public URL if not provided
+ENV PUBLIC_URL=""
+
+ENTRYPOINT ["sh", "-c", "poetry run pikaraoke -d /app/pikaraoke-songs/ --headless -l 10 -c ${PUBLIC_URL:+-u} ${PUBLIC_URL}"]
