@@ -67,6 +67,13 @@
       flex: 1;
     }
   }
+  ul.search_result_items img {
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  ul.search_result_items img:hover {
+    opacity: 0.8;
+  }
 </style>
 <script>
   $(function () {
@@ -595,7 +602,9 @@
         value="{{url}}"
         data-index="{{loop.index0}}"
       >
-        <img src="https://img.youtube.com/vi/{{id}}/0.jpg" />
+        <a href="{{url}}" target="_blank" rel="noopener noreferrer" title="Preview on YouTube">
+          <img src="https://img.youtube.com/vi/{{id}}/0.jpg" />
+        </a>
         <div class="search_result_items_meta">
           {{title}}
           <button class="button search_result_items_download">Download</button>
